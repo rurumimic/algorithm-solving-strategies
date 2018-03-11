@@ -17,17 +17,17 @@ import java.util.Scanner;
  			  // numbers[j] = s.nextInt();
  			  psum[j] = psum[j-1] + s.nextInt();
  			}
- 			System.out.printf("%.10f\n", findMin(psum, l));
+ 			System.out.printf("%.12f\n", findMin(psum, l));
  			
  		}
 		
 
  	}
  	
- 	private float findMin(int[] psum, int range){
+ 	private static double findMin(int[] psum, int range){
  	  //부분합을 구할 때 꿀팁으로는, 첫 번째 배열요소부터 누적합을 구하고, 이를 배열에 저장한다. 이후로는 저장된 누적합을 통해 범위합을 구할 수 있다.
  	  //ex) {1, 2, 3, 4} -> {1, 3, 6, 10} -> {2, 3}합 구하려면 6 - 1 해주면 된다.
- 	  float result = Float.MAX_VALUE;
+ 	  double result = Double.MAX_VALUE;
  	  int startPsum = 0;
  	  for(int i=-1;i<psum.length-range;i++){
  	    if(i == -1){
@@ -38,7 +38,7 @@ import java.util.Scanner;
  	    }
  	    
  	    for(int j = i + range;j<psum.length;j++){
- 	      result = Math.min(result, (float)(psum[j] - startPsum) / (j - i));
+ 	      result = Math.min(result, (double)(psum[j] - startPsum) / (j - i));
  	    }
  	    
  	  }
