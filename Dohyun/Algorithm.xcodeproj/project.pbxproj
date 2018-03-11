@@ -23,7 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C987E3872055345F005B6CB0 /* Dohyun */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Dohyun; sourceTree = BUILT_PRODUCTS_DIR; };
+		C987E3872055345F005B6CB0 /* Algorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Algorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		C987E38A2055345F005B6CB0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -41,7 +41,7 @@
 		C987E37E2055345E005B6CB0 = {
 			isa = PBXGroup;
 			children = (
-				C987E3892055345F005B6CB0 /* Dohyun */,
+				C987E3892055345F005B6CB0 /* Chapter01 */,
 				C987E3882055345F005B6CB0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,25 +49,25 @@
 		C987E3882055345F005B6CB0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C987E3872055345F005B6CB0 /* Dohyun */,
+				C987E3872055345F005B6CB0 /* Algorithm */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C987E3892055345F005B6CB0 /* Dohyun */ = {
+		C987E3892055345F005B6CB0 /* Chapter01 */ = {
 			isa = PBXGroup;
 			children = (
 				C987E38A2055345F005B6CB0 /* main.cpp */,
 			);
-			path = Dohyun;
+			path = Chapter01;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C987E3862055345F005B6CB0 /* Dohyun */ = {
+		C987E3862055345F005B6CB0 /* Algorithm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C987E38E2055345F005B6CB0 /* Build configuration list for PBXNativeTarget "Dohyun" */;
+			buildConfigurationList = C987E38E2055345F005B6CB0 /* Build configuration list for PBXNativeTarget "Algorithm" */;
 			buildPhases = (
 				C987E3832055345F005B6CB0 /* Sources */,
 				C987E3842055345F005B6CB0 /* Frameworks */,
@@ -77,9 +77,9 @@
 			);
 			dependencies = (
 			);
-			name = Dohyun;
+			name = Algorithm;
 			productName = Dohyun;
-			productReference = C987E3872055345F005B6CB0 /* Dohyun */;
+			productReference = C987E3872055345F005B6CB0 /* Algorithm */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -97,7 +97,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C987E3822055345E005B6CB0 /* Build configuration list for PBXProject "Dohyun" */;
+			buildConfigurationList = C987E3822055345E005B6CB0 /* Build configuration list for PBXProject "Algorithm" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -109,7 +109,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C987E3862055345F005B6CB0 /* Dohyun */,
+				C987E3862055345F005B6CB0 /* Algorithm */,
 			);
 		};
 /* End PBXProject section */
@@ -250,7 +250,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C987E3822055345E005B6CB0 /* Build configuration list for PBXProject "Dohyun" */ = {
+		C987E3822055345E005B6CB0 /* Build configuration list for PBXProject "Algorithm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C987E38C2055345F005B6CB0 /* Debug */,
@@ -259,7 +259,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C987E38E2055345F005B6CB0 /* Build configuration list for PBXNativeTarget "Dohyun" */ = {
+		C987E38E2055345F005B6CB0 /* Build configuration list for PBXNativeTarget "Algorithm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C987E38F2055345F005B6CB0 /* Debug */,
