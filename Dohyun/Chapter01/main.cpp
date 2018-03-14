@@ -33,7 +33,7 @@ double compute() {
     int begin = 0;
     double count = 0.0;
     double sum = 0.0;
-    double baseMean = 987654321.0;
+    double baseMean = 0.0;
     double tempMean = 0.0;
     double resultMean = 987654321.0;
 
@@ -41,7 +41,7 @@ double compute() {
         sum = 0;
         count = teams;
 
-        for(begin = i; begin < teams; begin++) {
+        for(begin = i; begin < i + teams; begin++) {
           sum = sum + rentfee[begin];
         }
 
@@ -66,7 +66,7 @@ double compute() {
 
 int main(int argc, const char * argv[]) {
     int testcase;
-
+    
     cin >> testcase;
     vector<double> result(testcase);
 
