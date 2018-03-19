@@ -15,16 +15,16 @@ void makeData() {
     days = 0;
     teams = 0;
     cost = 0;
-
+    
     cin >> days >> teams;
-
+    
     rentfee.resize(days);
-
+    
     for(int i = 0; i < days; i++) {
         cin >> cost;
         rentfee[i] = cost;
     }
-
+    
     return;
 }
 
@@ -36,21 +36,21 @@ double compute() {
     double baseMean = 0.0;
     double tempMean = 0.0;
     double resultMean = 987654321.0;
-
+    
     for(i = 0; i <= days-teams; i++) {
         sum = 0;
         count = teams;
-
+        
         for(begin = i; begin < i + teams; begin++) {
-          sum = sum + rentfee[begin];
+            sum = sum + rentfee[begin];
         }
-
+        
         baseMean = sum / teams;
-
+        
         if (baseMean < resultMean) {
             resultMean = baseMean;
         }
-
+        
         for(; begin < days; begin++) {
             count++;
             sum = sum + rentfee[begin];
@@ -60,7 +60,7 @@ double compute() {
             }
         }
     }
-
+    
     return resultMean;
 }
 
@@ -69,18 +69,19 @@ int main(int argc, const char * argv[]) {
     
     cin >> testcase;
     vector<double> result(testcase);
-
+    
     for(int i = 0; i < testcase; i++) {
         makeData();
         result[i] = compute();
     }
-
+    
     cout << fixed;
     cout.precision(12);
-
+    
     for(int j = 0; j < testcase; j++) {
         cout << result[j] << endl;
     }
-
+    
     return 0;
 }
+
