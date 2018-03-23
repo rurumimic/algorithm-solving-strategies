@@ -16,7 +16,7 @@
 
 Java로 하면서 다시금 확인한 요소다
 
-## pass by value, pass by reference
+### pass by value, pass by reference
 
 모두들 저 두 개의 차이는 알거라 생각하고 넘긴다
 
