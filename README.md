@@ -31,15 +31,19 @@
 # Samsung Software Expert Academy
 
 주의점이 있다. input.txt, output.txt라고 되어있는데
+
 실제로는 그냥 cmd에서 input, output하듯 처리해야한다.
+
 이것 때문에 엄청 헤맸는데 다른 분들은 그러지 마시길 ㅡㅡ!
 
 # Baekjoon
 
 12100번 문제를 풀면서 익힌 것들을 기록한다
+
 Java로 하면서 다시금 확인한 요소다
 
 # 기타 참고 사항
 
 ### Github 사용 시 Markdown을 활용하여 작성하는 법
+
 	https://gist.github.com/ihoneymon/652be052a0727ad59601#file-gistfile1-md
