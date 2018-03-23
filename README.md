@@ -46,4 +46,4 @@ Java로 하면서 다시금 확인한 요소다
 
 ### Github 사용 시 Markdown을 활용하여 작성하는 법
 
-	https://gist.github.com/ihoneymon/652be052a0727ad59601#file-gistfile1-md
+https://gist.github.com/ihoneymon/652be052a0727ad59601#file-gistfile1-md
