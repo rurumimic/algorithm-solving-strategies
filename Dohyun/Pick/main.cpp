@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
     
     std::vector<int> picked;
     
-    pick(7, picked, 4);
+    pick(6, picked, 3);
     
     return 0;
 }
