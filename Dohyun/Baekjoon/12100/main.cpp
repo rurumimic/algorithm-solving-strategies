@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-int methods[120][5] = {0, };
+int methods[1024][5] = {0, };
 int methodCount = 0;
 
 void look(int tile[][22], int size) {
@@ -169,19 +169,15 @@ void addMethod(int picked[], int size) {
     return;
 }
 
-void loop(int sorted[], int sortedSize, int notsorted[], int notSortedSize) {
-    if (notSortedSize == 0) { addMethod(sorted, sortedSize); return; }
+void loop(int sorted[], int sortedSize) {
+    if (sortedSize == 5) { addMethod(sorted, sortedSize); return; }
     int tempNotSorted[5] = {0, };
-    for(int i = 0; i < notSortedSize; i++) {
-        sorted[sortedSize] = notsorted[i];
-        for(int k = 0; k < notSortedSize; k++) {
-            tempNotSorted[k] = notsorted[k];
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 5; j++) {
+            tempNotSorted[j] = sorted[j];
         }
-        for(int j = i; j < notSortedSize; j++) {
-            tempNotSorted[j] = tempNotSorted[j+1];
-        }
-        loop(sorted, sortedSize+1, tempNotSorted, notSortedSize-1);
-        sorted[sortedSize] = 0;
+        tempNotSorted[sortedSize] = i;
+        loop(tempNotSorted, sortedSize+1);
     }
 }
 
@@ -231,11 +227,7 @@ int main(int argc, const char * argv[]) {
     }
 
     int sorted[5] = {0, };
-    int notsorted[5] = {0, };
-    for(int i = 0; i < 4; i++) {
-        notsorted[i] = i;
-    }
-    loop(sorted, 0, notsorted, 5);
+    loop(sorted, 0);
     
     printf("%d\n", move(tile, n));
 
