@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Algorithm.md">
+      location = "group:/Users/dodo/Documents/Develop/algorithm-solving-strategies/Dohyun/Algorithm/README.md">
    </FileRef>
    <FileRef
       location = "group:Graph/Graph.xcodeproj">
