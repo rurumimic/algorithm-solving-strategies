@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/dodo/Documents/Develop/algorithm-solving-strategies/Dohyun/Samsung/README.md">
+   </FileRef>
+   <FileRef
       location = "group:D6/D6.xcodeproj">
    </FileRef>
    <FileRef
