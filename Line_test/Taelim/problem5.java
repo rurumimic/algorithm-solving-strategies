@@ -21,10 +21,12 @@ public class Main {
 			int M;
 			int D;
 			int I;
+			float payPerDay;
 			Job(int M, int D, int I){
 				this.M = M;
 				this.D = D;
 				this.I = I;
+				this.payPerDay = (float)I / (float)(M + D - 1);
 			}
 		}
 		int[] day = new int[301];
@@ -39,10 +41,10 @@ public class Main {
 			@Override
 			public int compare(Job j1, Job j2) {
 				// TODO Auto-generated method stub
-				if(j1.I < j2.I){
+				if(j1.payPerDay < j2.payPerDay){
 					return 1;
 				}
-				else if(j1.I > j2.I){
+				else if(j1.payPerDay > j2.payPerDay){
 					return -1;
 				}
 				else{
@@ -67,6 +69,30 @@ public class Main {
 		}
 		
 		System.out.println(pay);
+		
+		selectedList.sort(new Comparator<Job>(){
+			
+			@Override
+			public int compare(Job j1, Job j2){
+				if(j1.M < j2.M){
+					return 1;
+				}
+				else if(j1.M < j2.M){
+					return -1;
+				}
+				else{
+					if(j1.D < j2.D){
+						return 1;
+					}
+					else if(j1.D > j2.D){
+						return -1;
+					}
+					else{
+						return 0;
+					}
+				}
+			}
+		});
 		for(int i = selectedList.size() - 1;i >= 0;i--){
 			System.out.println(selectedList.get(i).M+" "+selectedList.get(i).D);
 		}
