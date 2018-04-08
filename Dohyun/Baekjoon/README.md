@@ -1,3 +1,0 @@
-# Baekjoon
-
-Hey

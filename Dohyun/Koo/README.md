@@ -1,1 +1,0 @@
-# Algorithmic Problem Solbing Strategies
