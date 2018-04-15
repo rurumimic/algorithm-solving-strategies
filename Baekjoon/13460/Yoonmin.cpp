@@ -4,262 +4,123 @@
 
 using namespace std;
 
+class point {
+public:
+	int16_t x, y;
+
+	point() {}
+	point(int16_t ix, int16_t iy) {
+		x = ix; y = iy;
+	}
+	~point() {}
+
+	void operator+=(point &B) {
+		x += B.x; y += B.y;
+	}
+
+	void operator-=(point &B) {
+		x -= B.x; y -= B.y;
+	}
+
+	bool operator!=(point &B) {
+		if (x != B.x || y != B.y)
+			return true;
+		return false;
+	}
+
+	bool operator==(point &B) {
+		if (x == B.x && y == B.y)
+			return true;
+		return false;
+	}
+
+	point& operator=(const point &B) {
+		x = B.x; y = B.y;
+		return *this;
+	}
+};
+
+point d[4];
+
+enum _direction { UP, DOWN, RIGHT, LEFT, NONE };
+typedef _direction direction;
+char map[10][10];
+int16_t r, c;
+
 typedef struct _node {
-	int16_t rx, ry;
-	int16_t bx, by;
+	point r, b;
 	int16_t height;
+	direction dir;
 }node;
 
 list<node> queue;
 
-enum direction {UP, DOWN, RIGHT, LEFT};
-char map[10][10];
-int16_t r, c;
-
 node move(node prev_node, direction dir) {
 	node next_node;
 	next_node.height = prev_node.height + 1;
-	switch (dir)
-	{
-	case UP:
-		if (prev_node.rx == prev_node.bx) {
-			if (prev_node.ry < prev_node.by) {
-				for (int16_t y = prev_node.ry - 1; y >= 0; y--) {
-					if (map[y][prev_node.rx] == 'O') {
-						next_node.ry = y; next_node.rx = prev_node.rx;
-						next_node.by = y; next_node.bx = prev_node.bx;
-					}
-					else if (map[y][prev_node.rx] == '#') {
-						next_node.ry = y + 1; next_node.rx = prev_node.rx;
-					}
-				}
-				if (next_node.ry != next_node.by) {
-					for (int16_t y = prev_node.by - 1; y >= 0; y--) {
-						if (y == next_node.ry) {
-							next_node.by = y + 1; next_node.bx = prev_node.bx;
-						}
-					}
-				}
-			}
-			else {
-				for (int16_t y = prev_node.by - 1; y >= 0; y--) {
-					if (map[y][prev_node.bx] == 'O') {
-						next_node.by = y; next_node.bx = prev_node.bx;
-						next_node.ry = y; next_node.rx = prev_node.rx;
-					}
-					else if (map[y][prev_node.bx] == '#') {
-						next_node.by = y + 1; next_node.bx = prev_node.bx;
-					}
-				}
-				if (next_node.ry != next_node.by) {
-					for (int16_t y = prev_node.ry - 1; y >= 0; y--) {
-						if (y == next_node.by) {
-							next_node.ry = y + 1; next_node.rx = prev_node.rx;
-						}
-					}
-				}
-			}
+	next_node.dir = dir;
+	point o(0, 0), tr = prev_node.r, tb = prev_node.b;
+	next_node.r = o; next_node.b = o;
+
+	while (next_node.r == o && next_node.b == o) {
+		if (next_node.r == o) {
+			tr += d[dir];
 		}
-		else {
-			for (int16_t y = prev_node.ry - 1; y >= 0; y--) {
-				if (map[y][prev_node.rx] == 'O') {
-					next_node.ry = y; next_node.rx = prev_node.rx;
-				}
-				else if (map[y][prev_node.rx] == '#') {
-					next_node.ry = y + 1; next_node.rx = prev_node.rx;
-				}
-			}
-			for (int16_t y = prev_node.by - 1; y >= 0; y--) {
-				if (map[y][prev_node.bx] == 'O') {
-					next_node.by = y; next_node.bx = prev_node.bx;
-				}
-				else if (map[y][prev_node.bx] == '#') {
-					next_node.by = y + 1; next_node.bx = prev_node.bx;
-				}
-			}
+		if (next_node.b == o) {
+			tb += d[dir];
 		}
-		break;
-	case DOWN:
-		if (prev_node.rx == prev_node.bx) {
-			if (prev_node.ry > prev_node.by) {
-				for (int16_t y = prev_node.ry + 1; y < r; y++) {
-					if (map[y][prev_node.rx] == 'O') {
-						next_node.ry = y; next_node.rx = prev_node.rx;
-						next_node.by = y; next_node.bx = prev_node.bx;
-					}
-					else if (map[y][prev_node.rx] == '#') {
-						next_node.ry = y - 1; next_node.rx = prev_node.rx;
-					}
-				}
-				if (next_node.ry != next_node.by) {
-					for (int16_t y = prev_node.by + 1; y < r; y++) {
-						if (y == next_node.ry) {
-							next_node.by = y - 1; next_node.bx = prev_node.bx;
-						}
-					}
-				}
-			}
-			else {
-				for (int16_t y = prev_node.by + 1; y < r; y++) {
-					if (map[y][prev_node.bx] == 'O') {
-						next_node.by = y; next_node.bx = prev_node.bx;
-						next_node.ry = y; next_node.rx = prev_node.rx;
-					}
-					else if (map[y][prev_node.bx] == '#') {
-						next_node.by = y - 1; next_node.bx = prev_node.bx;
-					}
-				}
-				if (next_node.ry != next_node.by) {
-					for (int16_t y = prev_node.ry + 1; y < r; y++) {
-						if (y == next_node.by) {
-							next_node.ry = y - 1; next_node.rx = prev_node.rx;
-						}
-					}
-				}
-			}
+		if (map[tr.y][tr.x] == 'O') {
+			next_node.r = tr;
 		}
-		else {
-			for (int16_t y = prev_node.ry + 1; y < r; y++) {
-				if (map[y][prev_node.rx] == 'O') {
-					next_node.ry = y; next_node.rx = prev_node.rx;
-				}
-				else if (map[y][prev_node.rx] == '#') {
-					next_node.ry = y - 1; next_node.rx = prev_node.rx;
-				}
-			}
-			for (int16_t y = prev_node.by + 1; y < r; y++) {
-				if (map[y][prev_node.bx] == 'O') {
-					next_node.by = y; next_node.bx = prev_node.bx;
-				}
-				else if (map[y][prev_node.bx] == '#') {
-					next_node.by = y - 1; next_node.bx = prev_node.bx;
-				}
-			}
+		else if (map[tr.y][tr.x] == '#') {
+			tr -= d[dir];
+			next_node.r = tr;
 		}
-		break;
-	case RIGHT:
-		if (prev_node.ry == prev_node.by) {
-			if (prev_node.rx > prev_node.bx) {
-				for (int16_t x = prev_node.rx + 1; x < c; x++) {
-					if (map[prev_node.ry][x] == 'O') {
-						next_node.ry = prev_node.ry; next_node.rx = x;
-						next_node.by = prev_node.by; next_node.bx = x;
-					}
-					else if (map[prev_node.ry][x] == '#') {
-						next_node.ry = prev_node.ry; next_node.rx = x - 1;
-					}
-				}
-				if (next_node.rx != next_node.bx) {
-					for (int16_t x = prev_node.bx + 1; x < c; x++) {
-						if (x == next_node.rx) {
-							next_node.by = prev_node.by; next_node.bx = x - 1;
-						}
-					}
-				}
-			}
-			else {
-				for (int16_t x = prev_node.bx + 1; x < c; x++) {
-					if (map[prev_node.by][x] == 'O') {
-						next_node.by = prev_node.by; next_node.bx = x;
-						next_node.ry = prev_node.by; next_node.rx = x;
-					}
-					else if (map[prev_node.by][x] == '#') {
-						next_node.by = prev_node.by; next_node.bx = x - 1;
-					}
-				}
-				if (next_node.rx != next_node.bx) {
-					for (int16_t x = prev_node.rx + 1; x < c; x++) {
-						if (x == next_node.bx) {
-							next_node.ry = prev_node.ry; next_node.rx = x - 1;
-						}
-					}
-				}
-			}
+		if (map[tb.y][tb.x] == 'O') {
+			next_node.b = tb;
 		}
-		else {
-			for (int16_t x = prev_node.rx + 1; x < c; x++) {
-				if (map[prev_node.ry][x] == 'O') {
-					next_node.ry = prev_node.ry; next_node.rx = x;
-				}
-				else if (map[prev_node.ry][x] == '#') {
-					next_node.ry = prev_node.ry; next_node.rx = x - 1;
-				}
-			}
-			for (int16_t x = prev_node.bx + 1; x < c; x++) {
-				if (map[prev_node.by][x] == 'O') {
-					next_node.by = prev_node.by; next_node.bx = x;
-				}
-				else if (map[prev_node.by][x] == '#') {
-					next_node.by = prev_node.by; next_node.bx = x - 1;
-				}
-			}
+		else if (map[tb.y][tb.x] == '#') {
+			tb -= d[dir];
+			next_node.b = tb;
 		}
-		break;
-	case LEFT:
-		if (prev_node.ry == prev_node.by) {
-			if (prev_node.rx < prev_node.bx) {
-				for (int16_t x = prev_node.rx - 1; x >= 0; x--) {
-					if (map[prev_node.ry][x] == 'O') {
-						next_node.ry = prev_node.ry; next_node.rx = x;
-						next_node.by = prev_node.by; next_node.bx = x;
-					}
-					else if (map[prev_node.ry][x] == '#') {
-						next_node.ry = prev_node.ry; next_node.rx = x + 1;
-					}
-				}
-				if (next_node.rx != next_node.bx) {
-					for (int16_t x = prev_node.bx - 1; x >= 0; x--) {
-						if (x == next_node.rx) {
-							next_node.by = prev_node.by; next_node.bx = x + 1;
-						}
-					}
-				}
-			}
-			else {
-				for (int16_t x = prev_node.bx - 1; x >= 0; x--) {
-					if (map[prev_node.by][x] == 'O') {
-						next_node.by = prev_node.by; next_node.bx = x;
-						next_node.ry = prev_node.by; next_node.rx = x;
-					}
-					else if (map[prev_node.by][x] == '#') {
-						next_node.by = prev_node.by; next_node.bx = x + 1;
-					}
-				}
-				if (next_node.rx != next_node.bx) {
-					for (int16_t x = prev_node.rx - 1; x >= 0; x--) {
-						if (x == next_node.bx) {
-							next_node.ry = prev_node.ry; next_node.rx = x + 1;
-						}
-					}
-				}
-			}
-		}
-		else {
-			for (int16_t x = prev_node.rx - 1; x >= 0; x--) {
-				if (map[prev_node.ry][x] == 'O') {
-					next_node.ry = prev_node.ry; next_node.rx = x;
-				}
-				else if (map[prev_node.ry][x] == '#') {
-					next_node.ry = prev_node.ry; next_node.rx = x + 1;
-				}
-			}
-			for (int16_t x = prev_node.bx - 1; x >= 0; x--) {
-				if (map[prev_node.by][x] == 'O') {
-					next_node.by = prev_node.by; next_node.bx = x;
-				}
-				else if (map[prev_node.by][x] == '#') {
-					next_node.by = prev_node.by; next_node.bx = x + 1;
-				}
-			}
-		}
-		break;
 	}
-	
+	while (next_node.r == o) {
+		if (map[tr.y][tr.x] == 'O') {
+			next_node.r = tr; break;
+		}
+		else if (map[tr.y][tr.x] == '#') {
+			tr -= d[dir];
+			next_node.r = tr;
+			break;
+		}
+		else if (tr == tb) {
+			tr -= d[dir];
+			next_node.r = tr;
+			break;
+		}
+		tr += d[dir];
+	}
+	while (next_node.b == o) {
+		if (map[tb.y][tb.x] == 'O') {
+			next_node.b = tb; break;
+		}
+		else if (map[tb.y][tb.x] == '#') {
+			tb -= d[dir];
+			next_node.b = tb; break;
+		}
+		else if (tb == tr) {
+			tb -= d[dir];
+			next_node.b = tb; break;
+		}
+		tb += d[dir];
+	}
+
+
 	return next_node;
 }
 
 int main(void) {
-	int16_t ox, oy;
+	point o;
 	node first;
 	int16_t height = -1;
 
@@ -267,66 +128,49 @@ int main(void) {
 
 	getchar();
 
+	d[0].x = 0; d[0].y = -1;
+	d[1].x = 0; d[1].y = 1;
+	d[2].x = 1; d[2].y = 0;
+	d[3].x = -1; d[3].y = 0;
+
 	for (int16_t y = 0; y < r; y++) {
 		for (int16_t x = 0; x < c; x++) {
 			map[y][x] = getchar();
 			if (map[y][x] == 'R') {
-				first.rx = x; first.ry = y;
+				first.r.x = x; first.r.y = y;
 			}
 			else if (map[y][x] == 'B') {
-				first.bx = x; first.by = y;
+				first.b.x = x; first.b.y = y;
 			}
 			else if (map[y][x] == 'O') {
-				ox = x; oy = y;
+				o.x = x; o.y = y;
 			}
 		}
 		getchar();
 	}
 	first.height = 0;
+	first.dir = NONE;
 
 	queue.push_back(first);
 
 	while (!queue.empty()) {
 		node dequeue = queue.front();
 		queue.pop_front();
-		if (dequeue.height > 10) break;
-		node _up, _down, _right, _left;
+		if (dequeue.height > 9) break;
+		node _up, _down, _right, _left, next;
 
-		_up = move(dequeue, UP);
-		if (_up.bx != ox || _up.by != oy) {
-			if (_up.rx == ox && _up.ry == oy) {
-				height = _up.height;
-				break;
+		for (int i = UP; i != NONE; i++) {
+			if ((direction)i == dequeue.dir) continue;
+			next = move(dequeue, (direction)i);
+			if (next.b != o) {
+				if (next.r == o) {
+					height = next.height;
+					break;
+				}
+				queue.push_back(next);
 			}
-			queue.push_back(_up);
 		}
-
-		_down = move(dequeue, DOWN);
-		if (_down.bx != ox || _down.by != oy) {
-			if (_down.rx == ox && _down.ry == oy) {
-				height = _down.height;
-				break;
-			}
-			queue.push_back(_down);
-		}
-
-		_right = move(dequeue, RIGHT);
-		if (_right.bx != ox || _right.by != oy) {
-			if (_right.rx == ox && _right.ry == oy) {
-				height = _right.height;
-				break;
-			}
-			queue.push_back(_right);
-		}
-
-		_left = move(dequeue, LEFT);
-		if (_left.bx != ox || _left.by != oy) {
-			if (_left.rx == ox && _left.ry == oy) {
-				height = _left.height;
-				break;
-			}
-			queue.push_back(_left);
-		}
+		if (height != -1) break;
 	}
 
 	printf("%hd\n", height);
